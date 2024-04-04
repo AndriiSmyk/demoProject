@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-around center">
+    <span fxFlexOffset="-10"><mat-icon>done</mat-icon><span fxHide.xs>Demo project</span></span>
+    <span class="toolbar-item" routerLink="/" fxHide.xs>Home</span>
+    <span class="toolbar-item" routerLink="/about-me" fxHide.xs>About me</span>
+    <span class="toolbar-item" routerLink="/edit" fxHide.xs>Edit</span>
+    <span class="toolbar-item" routerLink="/" fxShow.xs fxHide><mat-icon>home</mat-icon></span>
+    <span class="toolbar-item" routerLink="/about-me" fxShow.xs fxHide><mat-icon>person_pin</mat-icon></span>
+    <span class="toolbar-item" routerLink="/edit" fxShow.xs fxHide><mat-icon>edit</mat-icon></span>
+  </mat-toolbar-row>
+</mat-toolbar>

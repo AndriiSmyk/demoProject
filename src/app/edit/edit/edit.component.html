@@ -1,0 +1,24 @@
+<div class="container">
+  <div fxFlex="30" fxHide.xs></div>
+  <mat-card fxFlex="40" fxFlex.xs="100">
+    <mat-card-title>
+      Edit
+    </mat-card-title>
+    <mat-card-actions>
+      <form [formGroup]="editForm" (submit)="onSubmit()">
+        <mat-form-field fxFlexFill>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" (change)="onFieldChange()">
+        </mat-form-field>
+        <mat-form-field fxFlexFill>
+          <mat-label>Position</mat-label>
+          <input matInput formControlName="position" (change)="onFieldChange()">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button type="submit" mat-button color="primary" fxFlexFill [disabled]="disableButton">Submit</button>
+        </div>
+      </form>
+    </mat-card-actions>
+  </mat-card>
+  <div fxFlex="30" fxHide.xs></div>
+</div>

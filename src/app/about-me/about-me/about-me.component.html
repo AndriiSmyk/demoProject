@@ -1,0 +1,21 @@
+<div class="container">
+  <div fxFlex="20" fxHide.xs></div>
+  <mat-card fxFlex="60" fxFlex.xs="100">
+    <mat-card-header>
+      <img mat-card-avatar
+           src="https://www.stockvault.net//data/2018/08/28/254042/thumb16.jpg"
+           class="card-img" alt="image"/>
+      <mat-card-title>{{ name$ | async }}</mat-card-title>
+      <mat-card-subtitle>{{ position$ | async }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h2>Information:</h2>
+      <ul>
+        <li>Birth date: January 1, 1970</li>
+        <li>Email: firstname.secondname@domain.com</li>
+        <li>Phone: +380 77 777-77-77</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+  <div fxFlex="20" fxHide.xs></div>
+</div>
