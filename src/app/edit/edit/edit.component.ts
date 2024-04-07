@@ -1,41 +1,46 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {Store} from "@ngxs/store";
-import {ChangeName, ChangePosition} from "../../store/actions";
+import {PositionService} from "../../services/position/position.service";
+import {NameService} from "../../services/name/name.service";
+import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
   editForm: FormGroup;
-  disableButton: boolean;
+  private destroyName$: Subject<Boolean> = new Subject<Boolean>();
+  private destroyPosition$: Subject<Boolean> = new Subject<Boolean>();
 
-  constructor(private fb: FormBuilder, private store: Store) {
-    this.disableButton = true;
+  constructor(private fb: FormBuilder, private positionService: PositionService, private nameService: NameService, private router: Router) {
     this.editForm = this.fb.group({
       name: '',
-      position:''
+      position: ''
     })
   }
 
   ngOnInit(): void {
-  }
-
-  onFieldChange(): void {
-    this.disableButton = this.editForm.value.name.length==0 && this.editForm.value.position.length==0;
+    this.nameService.name$.pipe(takeUntil(this.destroyName$)).subscribe(n=>this.editForm.patchValue({name:n.name}));
+    this.positionService.position$.pipe(takeUntil(this.destroyPosition$)).subscribe(p=>this.editForm.patchValue({position:p.position}))
   }
 
   onSubmit() {
     let name = this.editForm.value.name;
     let position = this.editForm.value.position;
-    if (name.length!=0){
-      this.store.dispatch(new ChangeName(name));
-    }
-    if (position.length!=0){
-      this.store.dispatch(new ChangePosition(position));
-    }
-    this.editForm.reset();
+    this.nameService.changeName(name);
+    this.positionService.changePosition(position);
+    this.router.navigate(['/about-me'])
   }
+
+  ngOnDestroy(): void {
+    this.destroyName$.next(true);
+    this.destroyName$.unsubscribe();
+    this.destroyPosition$.next(true);
+    this.destroyPosition$.unsubscribe();
+  }
+
+
 }

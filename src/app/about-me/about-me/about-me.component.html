@@ -5,8 +5,8 @@
       <img mat-card-avatar
            src="https://www.stockvault.net//data/2018/08/28/254042/thumb16.jpg"
            class="card-img" alt="image"/>
-      <mat-card-title>{{ name$ | async }}</mat-card-title>
-      <mat-card-subtitle>{{ position$ | async }}</mat-card-subtitle>
+      <mat-card-title *ngIf="nameService.name$ | async as name">{{ name.name }}</mat-card-title>
+      <mat-card-subtitle *ngIf="positionService.position$ | async as position">{{ position.position }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <h2>Information:</h2>

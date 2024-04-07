@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EditComponent } from './edit/edit.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EditComponent} from './edit/edit.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
@@ -28,4 +28,5 @@ const routes: Routes = [
     MatButtonModule
   ]
 })
-export class EditModule { }
+export class EditModule {
+}

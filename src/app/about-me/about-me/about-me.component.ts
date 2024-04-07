@@ -1,20 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import {map, Observable} from "rxjs";
-import {Store} from "@ngxs/store";
+import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {NameStateModel} from "../../store/name.state";
+import {PositionStateModel} from "../../store/position.state";
+import {NameService} from "../../services/name/name.service";
+import {PositionService} from "../../services/position/position.service";
+
 @Component({
   selector: 'app-about-me',
   templateUrl: './about-me.component.html',
   styleUrls: ['./about-me.component.scss']
 })
 export class AboutMeComponent implements OnInit {
-  name$!:Observable<string>;
-  position$!:Observable<string>;
+  name$!: Observable<NameStateModel>;
+  position$!: Observable<PositionStateModel>;
 
-  constructor(private store:Store) { }
+  constructor(protected nameService: NameService, protected positionService: PositionService) {
+  }
 
   ngOnInit(): void {
-    this.name$ = this.store.select(state => state.name).pipe(map(state=>state.name));
-    this.position$ = this.store.select(state => state.position).pipe(map(state=>state.position));
+    this.name$ = this.nameService.name$;
+    this.position$ = this.positionService.position$;
   }
 
 }
